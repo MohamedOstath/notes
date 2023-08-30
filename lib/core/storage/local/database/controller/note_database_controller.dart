@@ -1,4 +1,5 @@
 import 'package:note_flutter_local_database/core/constants.dart';
+import 'package:note_flutter_local_database/core/extension/extensions.dart';
 import 'package:note_flutter_local_database/core/storage/local/database/modle/note.dart';
 import 'package:note_flutter_local_database/core/storage/local/database/provider/database_operations.dart';
 import 'package:note_flutter_local_database/core/storage/local/database/provider/database_provider.dart';
@@ -46,8 +47,29 @@ class NoteDatabaseController extends DataBaseOperations<Note> {
   }
 
   @override
-  Future<bool> update(Note object) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Note?> searchByNameOrId(int? id, String? name) async {
+    var data = await database.query(
+      Constants.databaseNotesTableName,
+      where:
+          '${Constants.databaseIdColumnName} = ? or ${Constants.databaseContentColumnName} = ?',
+      whereArgs: [id.onNull(), name.onNull],
+    );
+
+    if (data.isNotEmpty) {
+      return Note.fromMap(data.first);
+    }
+    return null;
+  }
+
+  @override
+  Future<bool> update(Note object) async {
+    int countOfRowsUpdated = await database.update(
+      Constants.databaseNotesTableName,
+      object.toMap(),
+      where: '${Constants.databaseIdColumnName} = ?',
+      whereArgs: [object.id],
+    );
+
+    return countOfRowsUpdated > 0;
   }
 }
