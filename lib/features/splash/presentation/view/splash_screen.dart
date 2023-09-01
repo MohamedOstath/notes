@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:note_flutter_local_database/core/constants.dart';
 
 import '../../../../../routes/routes.dart';
-import '../../../../resources/manager_colors.dart';
-import '../../../../resources/manager_font_sizes.dart';
-import '../../../../resources/manager_strings.dart';
+import '../../../../core/resources/manager_colors.dart';
+import '../../../../core/resources/manager_font_sizes.dart';
+import '../../../../core/resources/manager_strings.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

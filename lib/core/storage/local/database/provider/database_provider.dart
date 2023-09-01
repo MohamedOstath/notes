@@ -30,7 +30,9 @@ class DatabaseProvider {
         database.execute(
           'CREATE TABLE ${Constants.databaseNotesTableName} ('
           '${Constants.databaseIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, '
-          '${Constants.databaseContentColumnName} TEXT)',
+          '${Constants.databaseContentColumnName} TEXT, '
+          '${Constants.databaseNotesTitleColumnName} TEXT'
+          ')',
         );
       },
       onOpen: (database) {},
